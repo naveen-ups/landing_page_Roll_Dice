@@ -1,0 +1,369 @@
+.game-showcase{
+  background: linear-gradient(180deg, rgba(10,5,32,0.8) 0%, rgba(18,10,53,0.9) 50%, rgba(10,5,32,0.8) 100%);
+  padding: 80px 20px;
+  position: relative;
+  overflow: hidden;
+  border-top: 2px solid rgba(0,245,255,0.1);
+  border-bottom: 2px solid rgba(0,245,255,0.1);
+}
+
+.showcase-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.showcase-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  color: #FFD700;
+  text-align: center;
+  text-shadow: 0 0 30px rgba(255,215,0,0.6);
+  margin: 0 0 10px 0;
+  text-transform: uppercase;
+}
+
+.showcase-subtitle {
+  text-align: center;
+  color: rgba(255,255,255,0.7);
+  font-size: 1rem;
+  margin: 0 0 50px 0;
+  letter-spacing: 0.05em;
+}
+
+.showcase-carousel {
+  position: relative;
+  height: 500px;
+  margin: 0 auto 50px;
+  max-width: 900px;
+}
+
+.showcase-slide {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.showcase-game-card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border: 2px solid rgba(0,245,255,0.3);
+  border-radius: 20px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.8), 0 0 60px rgba(0,245,255,0.1);
+}
+
+.showcase-image-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 20px;
+  z-index: 1;
+}
+
+.showcase-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.showcase-game-card:hover .showcase-image-wrapper img {
+  transform: scale(1.08);
+}
+
+.showcase-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.8) 50%, rgba(0,0,0,0.95) 100%);
+}
+
+.showcase-info {
+  position: relative;
+  z-index: 2;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  justify-content: flex-end;
+}
+
+.showcase-info h3 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: #fff;
+  text-shadow: 0 0 20px rgba(0,245,255,0.5);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.showcase-meta {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.showcase-meta .category {
+  background: rgba(0,245,255,0.1);
+  border: 1px solid rgba(0,245,255,0.3);
+  color: #00F5FF;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.showcase-meta .rtp {
+  color: #FFD700;
+  font-weight: 700;
+  font-size: 1rem;
+  text-shadow: 0 0 10px rgba(255,215,0,0.5);
+}
+
+.showcase-btn {
+  background: linear-gradient(135deg, #00F5FF 0%, #00A8FF 100%);
+  color: #05020F;
+  border: none;
+  padding: 14px 40px;
+  border-radius: 50px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 30px rgba(0,245,255,0.4);
+  text-transform: uppercase;
+  align-self: flex-start;
+  margin-top: 10px;
+}
+
+.showcase-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(0,245,255,0.6);
+}
+
+.showcase-btn:active {
+  transform: translateY(-1px);
+}
+
+/* Navigation Buttons */
+.nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(0,245,255,0.1) 0%, rgba(0,245,255,0.05) 100%);
+  border: 2px solid rgba(0,245,255,0.4);
+  color: #00F5FF;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 10;
+  box-shadow: 0 0 20px rgba(0,245,255,0.2);
+}
+
+.nav-btn:hover {
+  background: rgba(0,245,255,0.2);
+  box-shadow: 0 0 40px rgba(0,245,255,0.5);
+  border-color: #00F5FF;
+}
+
+.nav-btn.prev {
+  left: -40px;
+}
+
+.nav-btn.next {
+  right: -40px;
+}
+
+/* Thumbnail Gallery */
+.showcase-thumbnails {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.thumbnail {
+  width: 120px;
+  height: 80px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 2px solid rgba(0,245,255,0.2);
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s ease;
+  background: rgba(0,0,0,0.5);
+}
+
+.thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.thumbnail-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent, rgba(0,0,0,0.4));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.thumbnail:hover img {
+  transform: scale(1.1);
+}
+
+.thumbnail:hover {
+  border-color: #00F5FF;
+  box-shadow: 0 0 20px rgba(0,245,255,0.4);
+}
+
+.thumbnail.active {
+  border-color: #00F5FF;
+  box-shadow: 0 0 30px rgba(0,245,255,0.6), inset 0 0 15px rgba(0,245,255,0.2);
+}
+
+.thumbnail.active .thumbnail-overlay {
+  opacity: 1;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .showcase-carousel {
+    height: 450px;
+  }
+
+  .showcase-info {
+    padding: 30px;
+  }
+
+  .nav-btn {
+    width: 50px;
+    height: 50px;
+  }
+
+  .nav-btn.prev {
+    left: 10px;
+  }
+
+  .nav-btn.next {
+    right: 10px;
+  }
+}
+
+@media (max-width: 768px) {
+  .game-showcase {
+    padding: 60px 20px;
+  }
+
+  .showcase-title {
+    font-size: 2rem;
+  }
+
+  .showcase-carousel {
+    height: 400px;
+    margin-bottom: 30px;
+  }
+
+  .showcase-info {
+    padding: 24px;
+  }
+
+  .showcase-info h3 {
+    font-size: 1.5rem;
+  }
+
+  .showcase-btn {
+    padding: 12px 30px;
+    font-size: 0.85rem;
+  }
+
+  .thumbnail {
+    width: 100px;
+    height: 70px;
+  }
+
+  .showcase-meta {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .game-showcase {
+    padding: 40px 12px;
+  }
+
+  .showcase-title {
+    font-size: 1.6rem;
+  }
+
+  .showcase-carousel {
+    height: 360px;
+    margin-bottom: 20px;
+  }
+
+  .showcase-game-card {
+    border-radius: 12px;
+  }
+
+  .showcase-image-wrapper {
+    border-radius: 12px;
+  }
+
+  .showcase-info {
+    padding: 16px;
+  }
+
+  .showcase-info h3 {
+    font-size: 1.3rem;
+  }
+
+  .showcase-btn {
+    padding: 10px 20px;
+    font-size: 0.75rem;
+  }
+
+  .nav-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 0.9rem;
+  }
+
+  .thumbnail {
+    width: 80px;
+    height: 60px;
+  }
+
+  .nav-btn.prev {
+    left: 5px;
+  }
+
+  .nav-btn.next {
+    right: 5px;
+  }
+}

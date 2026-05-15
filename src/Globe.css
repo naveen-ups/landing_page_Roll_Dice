@@ -1,0 +1,173 @@
+.globe-section{
+  background:linear-gradient(180deg,var(--bg0),var(--bg2) 50%,var(--bg0));
+  position:relative;
+  overflow:hidden;
+}
+
+.globe-section::after {
+  content: '';
+  position: absolute;
+  bottom: -200px;
+  right: -200px;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(255,0,170,0.05) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.globe-body{
+  display:grid;grid-template-columns:1fr 1.2fr;gap:60px;
+  align-items:center;margin-top:60px;
+  background:linear-gradient(145deg,rgba(18,10,53,0.7),rgba(8,4,24,0.9));
+  border:1px solid rgba(0,245,255,0.12);
+  border-radius:24px;padding:50px;
+  perspective:1000px;
+  position:relative;
+}
+
+/* Globe */
+.globe-visual{
+  position:relative;width:280px;height:280px;
+  margin:0 auto;
+  filter:drop-shadow(0 0 40px rgba(0,245,255,0.2));
+  transform-style:preserve-3d;
+}
+
+.globe-ring{
+  position:absolute;border-radius:50%;border:1px solid;
+}
+
+.globe-ring--outer{
+  width:280px;height:280px;
+  border-color:rgba(0,245,255,0.2);
+  background:transparent;
+  box-shadow:0 0 40px rgba(0,245,255,0.1),inset 0 0 40px rgba(0,245,255,0.05);
+  will-change:transform;
+}
+
+.globe-ring--inner{
+  width:240px;height:240px;
+  border-color:rgba(255,0,170,0.15);
+  will-change:transform;
+}
+
+.globe-sphere{
+  position:absolute;
+  width:200px;height:200px;
+  border-radius:50%;
+  background:radial-gradient(circle at 35% 35%,#1A0A55 0%,#05020F 70%);
+  box-shadow:
+    inset -20px -20px 40px rgba(0,0,0,0.8),
+    inset 10px 10px 30px rgba(100,50,200,0.2),
+    0 0 60px rgba(0,245,255,0.15);
+  overflow:hidden;
+  will-change:transform;
+  transform-style:preserve-3d;
+}
+
+.globe-core{
+  width:100%;height:100%;display:flex;align-items:center;justify-content:center;
+  position:relative;
+}
+
+.globe-emoji{
+  font-size:5rem;
+  filter:saturate(0.8) brightness(0.9);
+  will-change:transform;
+  display:block;
+}
+
+.globe-scanline{
+  position:absolute;inset:0;border-radius:50%;
+  background:linear-gradient(
+    180deg,
+    rgba(0,245,255,0.05) 0%,
+    transparent 40%,
+    rgba(0,245,255,0.02) 100%
+  );
+  animation:scanline 3s linear infinite;
+}
+
+.globe-equator{
+  position:absolute;top:50%;left:10%;right:10%;
+  height:2px;transform:translateY(-50%);
+  background:linear-gradient(90deg,transparent,rgba(0,245,255,0.3),transparent);
+  will-change:opacity;
+}
+
+.orbit-dot{
+  position:absolute;
+  width:10px;height:10px;border-radius:50%;
+  background:var(--cyan);
+  box-shadow:0 0 12px var(--cyan),0 0 24px rgba(0,245,255,0.5);
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  will-change:transform;
+}
+
+/* Regions */
+.globe-regions{
+  display:flex;flex-direction:column;gap:14px;text-align:left;
+}
+
+.region-row{
+  display:flex;align-items:center;gap:12px;
+  background:rgba(0,0,0,0.3);border:1px solid rgba(255,255,255,0.06);
+  border-radius:10px;padding:12px 16px;
+  cursor:pointer;
+  transition:all 0.3s;
+  will-change:transform,box-shadow;
+}
+
+.region-row:hover{
+  border-color:var(--rc);
+  background:rgba(0,0,0,0.5);
+  box-shadow:0 0 16px rgba(0,0,0,0.4),inset 0 0 20px rgba(255,255,255,0.02);
+  transform:translateX(8px);
+}
+
+.rr-code{
+  font-family:'Orbitron',sans-serif;font-size:0.62rem;font-weight:700;
+  color:var(--rc);background:rgba(0,0,0,0.4);
+  padding:3px 7px;border-radius:5px;border:1px solid var(--rc);
+  min-width:34px;text-align:center;
+  text-shadow:0 0 8px var(--rc);
+}
+
+.rr-name{
+  font-size:0.9rem;font-weight:600;color:var(--text);flex:1;
+}
+
+.rr-bar{
+  width:100px;height:4px;background:rgba(255,255,255,0.08);border-radius:4px;overflow:hidden;
+  position:relative;
+}
+
+.rr-fill{
+  height:100%;background:var(--rc);border-radius:4px;
+  box-shadow:0 0 6px var(--rc);
+  will-change:width;
+}
+
+.rr-count{
+  font-family:'Orbitron',sans-serif;font-size:0.78rem;font-weight:700;
+  color:var(--rc);min-width:44px;text-align:right;
+  text-shadow:0 0 6px var(--rc);
+}
+
+.rr-dot{
+  width:8px;height:8px;border-radius:50%;
+  background:var(--rc);box-shadow:0 0 8px var(--rc);
+  will-change:transform;
+}
+
+.globe-micro{
+  margin-top:8px;
+  font-family:'Orbitron',sans-serif;font-size:0.6rem;
+  letter-spacing:0.1em;color:var(--muted);
+  text-align:center;
+}
+
+@media(max-width:900px){
+  .globe-body{grid-template-columns:1fr;padding:30px 20px;}
+}
