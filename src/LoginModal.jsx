@@ -23,7 +23,7 @@ export default function LoginModal({ onClose, gameTitle }) {
           <X size={24} />
         </button>
 
-        <img src="/logo.png" alt="Rolling Dice" className="login-modal__logo" />
+        <img src="/logo-DingDong.gif" alt="Ding Dong" className="login-modal__logo" />
 
         <h2 className="login-modal__title">Sign in to play {gameTitle}</h2>
         <p className="login-modal__subtitle">Enter your account to continue</p>

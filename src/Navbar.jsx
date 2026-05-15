@@ -23,7 +23,7 @@ export default function Navbar() {
     <nav className={`nav${scrolled ? " nav--solid" : ""}`}>
       <div className="nav__inner">
         <a href="#home" className="nav__logo-link">
-          <img src="/logo.png" alt="Rolling Dice" className="nav__logo-img" />
+          <img src="/logo-DingDong.gif" alt="Ding Dong" className="nav__logo-img" />
         </a>
 
         <ul className={`nav__links ${open ? "open" : ""}`}>

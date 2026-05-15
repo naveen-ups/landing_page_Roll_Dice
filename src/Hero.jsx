@@ -16,8 +16,8 @@ export default function Hero({ navigateToAllGames }) {
           transition={{ duration: 0.8 }}
         >
           <motion.img 
-            src="/logo1.png" 
-            alt="Rolling Dice Logo" 
+            src="/logo-DingDong.gif" 
+            alt="Ding Dong Logo" 
             className="hero__logo-large"
             initial={{ scale: 0.8 }}
             animate={{ scale: 1 }}

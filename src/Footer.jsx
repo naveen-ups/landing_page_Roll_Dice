@@ -7,7 +7,7 @@ export default function Footer() {
         {/* Logo */}
         <div className="footer__brand">
           <a href="#home" className="footer__logo-link">
-            <img src="/logo.png" alt="Rolling Dice" className="footer__logo-img" />
+            <img src="/logo-DingDong.gif" alt="Ding Dong" className="footer__logo-img" />
           </a>
         </div>
 
