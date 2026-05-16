@@ -87,4 +87,12 @@
   .hero__content {
     gap: 20px;
   }
+  .hero__title {
+    font-size: clamp(1rem, 4.8vw, 1.5rem);
+    white-space: nowrap;
+    overflow: visible;
+    text-overflow: clip;
+    width: 100%;
+    max-width: 95vw;
+  }
 }

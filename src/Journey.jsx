@@ -51,7 +51,7 @@ export default function Journey() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          GROWING EVERY<br/>DAY
+          GROWING EVERY DAY
         </motion.h2>
         <div className="neon-divider"/>
         <p className="section-sub">We are constantly improving and expanding to deliver better gaming experiences.</p>

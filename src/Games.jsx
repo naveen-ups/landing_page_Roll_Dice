@@ -53,123 +53,126 @@ export default function Games({ navigateToAllGames, navigateToGameView }) {
   };
 
   return (
-    <section id="games" className="section games-section">
-      <div className="eyebrow">◆ GAME UNIVERSE</div>
-      <motion.h2 
-        className="section-title text-white-glow"
-        initial={{ opacity: 0, y: -20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-      >
-        EXPLORE OUR<br/>GAMES
-      </motion.h2>
-      <div className="neon-divider"/>
-      <p className="section-sub">A wide range of games designed for every type of player.</p>
-
-      <div className="games-carousel-wrapper">
-        <button className="carousel-btn left" onClick={() => scroll("left")}>
-          <ChevronLeft size={24} />
-        </button>
-
-        <motion.div 
-          className="games-grid"
-          ref={scrollRef}
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-      >
-        {GAMES.map((g, idx) => (
-          <motion.div
-            key={g.id}
-            className="game-card"
-            style={{
-              "--gc": g.color,
-              "--gg": g.glow,
-            }}
-            variants={cardVariants}
-            whileHover="hover"
-            onMouseEnter={() => setHoveredId(g.id)}
-            onMouseLeave={() => setHoveredId(null)}
-            onClick={() => navigateToGameView(g)}
-          >
-            {/* Game Image Background */}
-            <div className="gc-image-wrapper">
-              <img src={g.image} alt={g.name} className="gc-image" />
-              {/* Overlay gradient */}
-              <div className="gc-overlay" />
-            </div>
-
-            {/* Particle effect on hover */}
-            {hoveredId === g.id && (
-              <>
-                {[...Array(8)].map((_, i) => (
-                  <motion.div
-                    key={i}
-                    className="particle"
-                    initial={{ x: 0, y: 0, opacity: 1 }}
-                    animate={{ x: (Math.random() - 0.5) * 120, y: -120, opacity: 0 }}
-                    transition={{ duration: 1 }}
-                    style={{
-                      position: "absolute",
-                      width: 6,
-                      height: 6,
-                      background: g.color,
-                      borderRadius: "50%",
-                      left: "50%",
-                      top: "50%",
-                      zIndex: 10,
-                    }}
-                  />
-                ))}
-              </>
-            )}
-
-            {/* Top glow bar */}
-            <motion.div 
-              className="gc-topbar"
-              animate={hoveredId === g.id ? { opacity: 1, boxShadow: `0 0 40px ${g.color}` } : { opacity: 0.3 }}
-            />
-            
-            {/* Badge */}
-            <motion.div 
-              className="gc-badge"
-              animate={hoveredId === g.id ? { scale: 1.15, rotateZ: -8 } : { scale: 1, rotateZ: 0 }}
-            >
-              {g.badge}
-            </motion.div>
-            
-            {/* Content Wrapper */}
-            <div className="gc-content">
-              {/* Game Info - Name and Desc only */}
-              <h3 className="gc-name">{g.name}</h3>
-              <p className="gc-desc">{g.desc}</p>
-            </div>
-          </motion.div>
-        ))}
-        </motion.div>
-
-        <button className="carousel-btn right" onClick={() => scroll("right")}>
-          <ChevronRight size={24} />
-        </button>
-      </div>
-
-      <motion.div 
-        style={{marginTop:50}}
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ delay: 0.5 }}
-      >
-        <motion.button 
-          className="btn btn-primary" 
-          style={{fontSize:"0.78rem"}}
-          onClick={navigateToAllGames}
-          whileHover={{ scale: 1.05, boxShadow: "0 0 40px rgba(255,0,170,0.8)" }}
-          whileTap={{ scale: 0.95 }}
+    <section id="games" className="games-section">
+      <div className="section-background popular-games-bg-img" />
+      <div className="section">
+        <div className="eyebrow">◆ GAME UNIVERSE</div>
+        <motion.h2 
+          className="section-title text-white-glow"
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
         >
-          VIEW ALL GAMES →
-        </motion.button>
-      </motion.div>
+          EXPLORE OUR GAMES
+        </motion.h2>
+        <div className="neon-divider"/>
+        <p className="section-sub">A wide range of games designed for every type of player.</p>
+  
+        <div className="games-carousel-wrapper">
+          <button className="carousel-btn left" onClick={() => scroll("left")}>
+            <ChevronLeft size={24} />
+          </button>
+  
+          <motion.div 
+            className="games-grid"
+            ref={scrollRef}
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+            {GAMES.map((g, idx) => (
+              <motion.div
+                key={g.id}
+                className="game-card"
+                style={{
+                  "--gc": g.color,
+                  "--gg": g.glow,
+                }}
+                variants={cardVariants}
+                whileHover="hover"
+                onMouseEnter={() => setHoveredId(g.id)}
+                onMouseLeave={() => setHoveredId(null)}
+                onClick={() => navigateToGameView(g)}
+              >
+                {/* Game Image Background */}
+                <div className="gc-image-wrapper">
+                  <img src={g.image} alt={g.name} className="gc-image" />
+                  {/* Overlay gradient */}
+                  <div className="gc-overlay" />
+                </div>
+  
+                {/* Particle effect on hover */}
+                {hoveredId === g.id && (
+                  <>
+                    {[...Array(8)].map((_, i) => (
+                      <motion.div
+                        key={i}
+                        className="particle"
+                        initial={{ x: 0, y: 0, opacity: 1 }}
+                        animate={{ x: (Math.random() - 0.5) * 120, y: -120, opacity: 0 }}
+                        transition={{ duration: 1 }}
+                        style={{
+                          position: "absolute",
+                          width: 6,
+                          height: 6,
+                          background: g.color,
+                          borderRadius: "50%",
+                          left: "50%",
+                          top: "50%",
+                          zIndex: 10,
+                        }}
+                      />
+                    ))}
+                  </>
+                )}
+  
+                {/* Top glow bar */}
+                <motion.div 
+                  className="gc-topbar"
+                  animate={hoveredId === g.id ? { opacity: 1, boxShadow: `0 0 40px ${g.color}` } : { opacity: 0.3 }}
+                />
+                
+                {/* Badge */}
+                <motion.div 
+                  className="gc-badge"
+                  animate={hoveredId === g.id ? { scale: 1.15, rotateZ: -8 } : { scale: 1, rotateZ: 0 }}
+                >
+                  {g.badge}
+                </motion.div>
+                
+                {/* Content Wrapper */}
+                <div className="gc-content">
+                  {/* Game Info - Name and Desc only */}
+                  <h3 className="gc-name">{g.name}</h3>
+                  <p className="gc-desc">{g.desc}</p>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+  
+          <button className="carousel-btn right" onClick={() => scroll("right")}>
+            <ChevronRight size={24} />
+          </button>
+        </div>
+  
+        <motion.div 
+          style={{marginTop:50}}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ delay: 0.5 }}
+        >
+          <motion.button 
+            className="btn btn-primary" 
+            style={{fontSize:"0.78rem"}}
+            onClick={navigateToAllGames}
+            whileHover={{ scale: 1.05, boxShadow: "0 0 40px rgba(255,0,170,0.8)" }}
+            whileTap={{ scale: 0.95 }}
+          >
+            VIEW ALL GAMES →
+          </motion.button>
+        </motion.div>
+      </div>
     </section>
   );
 }

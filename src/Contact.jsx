@@ -5,6 +5,7 @@ import "./Contact.css";
 export default function Contact() {
   return (
     <section id="contact" className="contact-section">
+      <div className="section-background contact-bg-img" />
       <div className="section">
         <motion.div 
           className="contact-box"

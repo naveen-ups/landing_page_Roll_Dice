@@ -79,6 +79,9 @@
   height: 100%;
   object-fit: cover;
   transition: transform 0.5s ease;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  will-change: transform;
 }
 
 .showcase-game-card:hover .showcase-image-wrapper img {
@@ -179,9 +182,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
   z-index: 10;
   box-shadow: 0 0 20px rgba(0,245,255,0.2);
+  margin: 0;
+  padding: 0;
 }
 
 .nav-btn:hover {
@@ -264,14 +269,16 @@
   .nav-btn {
     width: 50px;
     height: 50px;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
   }
 
   .nav-btn.prev {
-    left: 10px;
+    left: 5px;
   }
 
   .nav-btn.next {
-    right: 10px;
+    right: 5px;
   }
 }
 
@@ -281,7 +288,10 @@
   }
 
   .showcase-title {
-    font-size: 2rem;
+    font-size: clamp(1rem, 5vw, 1.5rem);
+    white-space: nowrap;
+    overflow: visible;
+    text-overflow: clip;
   }
 
   .showcase-carousel {
@@ -319,7 +329,10 @@
   }
 
   .showcase-title {
-    font-size: 1.6rem;
+    font-size: clamp(1rem, 5vw, 1.4rem);
+    white-space: nowrap;
+    overflow: visible;
+    text-overflow: clip;
   }
 
   .showcase-carousel {
@@ -349,9 +362,10 @@
   }
 
   .nav-btn {
-    width: 40px;
-    height: 40px;
-    font-size: 0.9rem;
+    width: 42px;
+    height: 42px;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
   }
 
   .thumbnail {
@@ -360,10 +374,10 @@
   }
 
   .nav-btn.prev {
-    left: 5px;
+    left: 2px;
   }
 
   .nav-btn.next {
-    right: 5px;
+    right: 2px;
   }
 }

@@ -58,12 +58,17 @@ export default function GameShowcase({ navigateToGameView }) {
             initial="enter"
             animate="center"
             exit="exit"
-            transition={{ duration: 0.5, ease: "easeInOut" }}
+            transition={{ duration: 0.1, ease: "easeOut" }}
             className="showcase-slide"
           >
             <div className="showcase-game-card" onClick={() => navigateToGameView(SHOWCASE_GAMES[current])} style={{cursor: 'pointer'}}>
               <div className="showcase-image-wrapper">
-                <img src={SHOWCASE_GAMES[current].image} alt={SHOWCASE_GAMES[current].title} />
+                <img 
+                  src={SHOWCASE_GAMES[current].image} 
+                  alt={SHOWCASE_GAMES[current].title} 
+                  loading="eager"
+                  decoding="sync"
+                />
                 <div className="showcase-overlay" />
               </div>
               <div className="showcase-info">
@@ -111,6 +116,13 @@ export default function GameShowcase({ navigateToGameView }) {
               <img src={game.image} alt={game.title} />
               <div className="thumbnail-overlay" />
             </motion.button>
+          ))}
+        </div>
+        
+        {/* Hidden Preload */}
+        <div style={{ display: 'none' }}>
+          {SHOWCASE_GAMES.map(game => (
+            <img key={game.id} src={game.image} alt="" />
           ))}
         </div>
       </div>
