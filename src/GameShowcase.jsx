@@ -1,45 +1,55 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import "./GameShowcase.css";
 
 const SHOWCASE_GAMES = [
-  { id: 1, title: "Quick Hit Pirate", image: "/games/multiplayer-pvp.jpg", category: "Action", rtp: "96.5%" },
-  { id: 2, title: "Gold Standard Jackpots", image: "/games/slots.jpg", category: "Slots", rtp: "97.2%" },
-  { id: 3, title: "Cash Machine Top Dollar", image: "/games/table-top.jpg", category: "Table", rtp: "98.1%" },
-  { id: 4, title: "Rock Climber", image: "/games/lottery.jpg", category: "Adventure", rtp: "96.8%" },
-  { id: 5, title: "Hufen Mystique", image: "/games/fast-action.jpg", category: "Fantasy", rtp: "97.5%" },
+  { id: 1, title: "Quick Hit Pirate", image: "/games/multiplayer-pvp.jpg", category: "Action", rtp: "96.5%", color: "#00F5FF", glow: "rgba(0,245,255,0.3)" },
+  { id: 2, title: "Gold Standard Jackpots", image: "/games/slots.jpg", category: "Slots", rtp: "97.2%", color: "#FF00AA", glow: "rgba(255,0,170,0.3)" },
+  { id: 3, title: "Cash Machine Top Dollar", image: "/games/table-top.jpg", category: "Table", rtp: "98.1%", color: "#FFD700", glow: "rgba(255,215,0,0.3)" },
+  { id: 4, title: "Rock Climber", image: "/games/lottery.jpg", category: "Adventure", rtp: "96.8%", color: "#00FF88", glow: "rgba(0,255,136,0.3)" },
+  { id: 5, title: "Hufen Mystique", image: "/games/fast-action.jpg", category: "Fantasy", rtp: "97.5%", color: "#FF6B35", glow: "rgba(255,107,53,0.3)" },
 ];
 
-export default function GameShowcase({ navigateToGameView }) {
-  const [current, setCurrent] = useState(0);
-  const [direction, setDirection] = useState(0);
-
-  const next = () => {
-    setDirection(1);
-    setCurrent((prev) => (prev + 1) % SHOWCASE_GAMES.length);
-  };
-
-  const prev = () => {
-    setDirection(-1);
-    setCurrent((prev) => (prev - 1 + SHOWCASE_GAMES.length) % SHOWCASE_GAMES.length);
-  };
-
-  const slideVariants = {
-    enter: (dir) => ({
-      x: dir > 0 ? 1000 : -1000,
-      opacity: 0,
-    }),
-    center: {
-      zIndex: 1,
-      x: 0,
-      opacity: 1,
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.2,
     },
-    exit: (dir) => ({
-      zIndex: 0,
-      x: dir < 0 ? 1000 : -1000,
-      opacity: 0,
-    }),
+  },
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 50, rotateX: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    rotateX: 0,
+    transition: {
+      duration: 0.6,
+      ease: "easeOut",
+    },
+  },
+  hover: {
+    y: -15,
+    scale: 1.05,
+    rotateZ: 2,
+    transition: { duration: 0.3 },
+  },
+};
+
+export default function GameShowcase({ navigateToGameView }) {
+  const [hoveredId, setHoveredId] = useState(null);
+  const scrollRef = useRef(null);
+
+  const scroll = (direction) => {
+    if (scrollRef.current) {
+      const scrollAmount = direction === "left" ? -300 : 300;
+      scrollRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
+    }
   };
 
   return (
@@ -49,81 +59,67 @@ export default function GameShowcase({ navigateToGameView }) {
         <h2 className="showcase-title">POPULAR GAMES</h2>
         <p className="showcase-subtitle">Experience our most played and highest-rated games</p>
 
-        <div className="showcase-carousel">
-          {/* Main Display */}
-          <motion.div
-            key={current}
-            custom={direction}
-            variants={slideVariants}
-            initial="enter"
-            animate="center"
-            exit="exit"
-            transition={{ duration: 0.1, ease: "easeOut" }}
-            className="showcase-slide"
+        <div className="showcase-carousel-wrapper">
+          <button className="nav-btn prev" onClick={() => scroll("left")}>
+            <ChevronLeft size={24} />
+          </button>
+
+          <motion.div 
+            className="showcase-grid"
+            ref={scrollRef}
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
           >
-            <div className="showcase-game-card" onClick={() => navigateToGameView(SHOWCASE_GAMES[current])} style={{cursor: 'pointer'}}>
-              <div className="showcase-image-wrapper">
-                <img 
-                  src={SHOWCASE_GAMES[current].image} 
-                  alt={SHOWCASE_GAMES[current].title} 
-                  loading="eager"
-                  decoding="sync"
-                />
-                <div className="showcase-overlay" />
-              </div>
-              <div className="showcase-info">
-                <h3>{SHOWCASE_GAMES[current].title}</h3>
-                <div className="showcase-meta">
-                  <span className="category">{SHOWCASE_GAMES[current].category}</span>
-                  <span className="rtp">RTP: {SHOWCASE_GAMES[current].rtp}</span>
+            {SHOWCASE_GAMES.map((game) => (
+              <motion.div
+                key={game.id}
+                className="showcase-game-card"
+                style={{
+                  "--gc": game.color,
+                  "--gg": game.glow,
+                }}
+                variants={cardVariants}
+                whileHover="hover"
+                onMouseEnter={() => setHoveredId(game.id)}
+                onMouseLeave={() => setHoveredId(null)}
+                onClick={() => navigateToGameView(game)}
+              >
+                {/* Game Image Background */}
+                <div className="showcase-image-wrapper">
+                  <img src={game.image} alt={game.title} className="showcase-image" />
+                  <div className="showcase-overlay" />
                 </div>
-              </div>
-            </div>
+
+                {/* Top glow bar */}
+                <motion.div 
+                  className="showcase-topbar"
+                  animate={hoveredId === game.id ? { opacity: 1, boxShadow: `0 0 40px ${game.color}` } : { opacity: 0.3 }}
+                />
+                
+                {/* Badge */}
+                <motion.div 
+                  className="showcase-badge"
+                  animate={hoveredId === game.id ? { scale: 1.15, rotateZ: -8 } : { scale: 1, rotateZ: 0 }}
+                >
+                  {game.category}
+                </motion.div>
+                
+                {/* Content Wrapper */}
+                <div className="showcase-info">
+                  <h3 className="showcase-name">{game.title}</h3>
+                  <div className="showcase-meta">
+                    <span className="rtp">RTP: {game.rtp}</span>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
           </motion.div>
 
-          {/* Navigation Buttons */}
-          <motion.button
-            className="nav-btn prev"
-            onClick={prev}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <ChevronLeft size={24} />
-          </motion.button>
-          <motion.button
-            className="nav-btn next"
-            onClick={next}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-          >
+          <button className="nav-btn next" onClick={() => scroll("right")}>
             <ChevronRight size={24} />
-          </motion.button>
-        </div>
-
-        {/* Thumbnail Gallery */}
-        <div className="showcase-thumbnails">
-          {SHOWCASE_GAMES.map((game, idx) => (
-            <motion.button
-              key={game.id}
-              className={`thumbnail ${idx === current ? "active" : ""}`}
-              onClick={() => {
-                setDirection(idx > current ? 1 : -1);
-                setCurrent(idx);
-              }}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <img src={game.image} alt={game.title} />
-              <div className="thumbnail-overlay" />
-            </motion.button>
-          ))}
-        </div>
-        
-        {/* Hidden Preload */}
-        <div style={{ display: 'none' }}>
-          {SHOWCASE_GAMES.map(game => (
-            <img key={game.id} src={game.image} alt="" />
-          ))}
+          </button>
         </div>
       </div>
     </section>
